@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Sno.</th>
+            <th>Task</th>
+            <th>Due Date</th>
+            <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for todo in result %}
+        <tr>
+          
+            <td>{{ forloop.counter }}  </td>
+            <td>{{ todo.task|title  }}</td>
+            <td>{{ todo.created_at}}</td>
+            <td><button>complete</button>
+            <a href="{% url 'update_todo' todo.id %}" class="btn btn-danger btn-sm">update todo </a>
+            <a href="{% url 'delete_todo'  todo.id  %}" class="btn btn-danger btn-sm">delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</body>
+</html>
+
+ <a href="{% url 'add_todo' %}" class="btn btn-primary mb-3">ADD TODO</a>
+
+  {% endblock %}
